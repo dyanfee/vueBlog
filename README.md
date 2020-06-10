@@ -1,5 +1,8 @@
 # blog
 
+一个基于vue+vuex+express+mongodb的个人博客。
+部署地址：http://yanfee.com
+
 ## Project setup
 ```
 npm install
