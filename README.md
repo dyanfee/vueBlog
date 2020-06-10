@@ -1,6 +1,7 @@
 # blog
 
 一个基于vue+vuex+express+mongodb的个人博客。
+项目后端：https://github.com/dyanfee/vueblogServer
 部署地址：http://yanfee.com
 
 ## Project setup
