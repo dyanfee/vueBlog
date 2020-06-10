@@ -1,0 +1,74 @@
+/*
+Date: 17.V.2011
+Author: pumbur <pumbur@pumbur.net>
+*/
+
+pre {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #ccc;
+  background: #2d2d2d;
+}
+
+code {
+  font-family: Consolas, Monaco, Andale Mono, monospace;
+  display: inline-block;
+  overflow-x: auto;
+  line-height: 1.2;
+  max-width: 100%;
+  padding: 0.3em;
+  color: #ccc;
+  background: #2d2d2d;
+}
+
+pre code {
+  line-height: 1.5em;
+}
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #2d2d2d;
+}
+
+.hljs, .hljs-subst {
+  color: #aaa;
+}
+
+.hljs-section {
+  color: #fff;
+}
+
+.hljs-comment, .hljs-quote, .hljs-meta {
+  color: #73c991;
+}
+
+.hljs-string, .hljs-symbol, .hljs-bullet, .hljs-regexp {
+  color: #ffcc33;
+}
+
+.hljs-number, .hljs-addition {
+  color: #00cc66;
+}
+
+.hljs-built_in, .hljs-builtin-name, .hljs-literal, .hljs-type, .hljs-template-variable, .hljs-attribute, .hljs-link {
+  color: #32aaee;
+}
+
+.hljs-keyword, .hljs-selector-tag, .hljs-name, .hljs-selector-id, .hljs-selector-class {
+  color: #6644aa;
+}
+
+.hljs-title, .hljs-variable, .hljs-deletion, .hljs-template-tag {
+  color: #bb1166;
+}
+
+.hljs-section, .hljs-doctag, .hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
