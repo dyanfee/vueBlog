@@ -40,10 +40,10 @@ export function notiMsg(msg) {
         type: "warning"
     });
 }
-export function alertMsg(message) {
+export function alertMsg(message, type = "error") {
     Vue.prototype.$message({
         message,
-        type: 'error',
+        type,
         showClose: true
     })
 }

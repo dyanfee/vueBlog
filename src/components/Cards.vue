@@ -46,7 +46,6 @@ export default {
   methods: {
     _getPostStat() {
       getPostStat().then(res => {
-        console.log('----------',res);
         this.$store.commit("addPostStat", res);
       });
     },
@@ -63,8 +62,6 @@ export default {
   },
   computed: {
     statistics() {
-      console.log(this.$store.getters.postStatData);
-
       return this.$store.getters.postStatData;
     },
     mail() {

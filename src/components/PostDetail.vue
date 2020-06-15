@@ -5,11 +5,13 @@
     <div class="post-tags">
       <div v-for="tag in post.tags" :key="tag" @click="handerClick(tag)"># {{tag}}</div>
     </div>
+    <comment :comments="comments" :post="post._id" />
   </div>
 </template>
 
 <script>
-import postHeader from "./postHeader";
+import postHeader from "components/postHeader";
+import Comment from "components/comment/Comment";
 import { getPostDetail } from "network/home";
 import marked from "marked";
 import hljs from "highlight.js";
@@ -30,32 +32,28 @@ marked.setOptions({
     const validLanguage = hljs.getLanguage(language) ? language : "bash";
     return hljs.highlight(validLanguage, code).value;
   }
-  // highlight: function(code) {
-  //   console.log(code);
-  //   console.log("---------------------");
-  //   console.log(hljs.highlightAuto(code));
-  //   console.log('==========================');
-  //   return hljs.highlightAuto(code).value;
-  // }
 });
 
 export default {
   name: "PostDetail",
   data() {
     return {
-      post: {}
+      post: {},
+      comments: []
     };
   },
   components: {
-    postHeader
+    postHeader,
+    Comment
   },
   created() {
     this._getPostDetail(this.$route.params.id);
   },
   methods: {
     _getPostDetail(id) {
-      getPostDetail(id).then(res => {
+      getPostDetail({ id, comments: true }).then(res => {
         this.post = res.post;
+        this.comments = res.comments || [];
       });
     },
     handerClick(tag) {
@@ -88,6 +86,8 @@ export default {
 .post-tags {
   display: flex;
   justify-content: center;
+  margin: 0 40px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 .post-tags div {
   margin: 0 10px 40px;

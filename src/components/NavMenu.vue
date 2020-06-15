@@ -25,14 +25,14 @@
         <i class="el-icon-s-grid"></i>
         <span slot="title">分类</span>
       </el-menu-item>
-      <!-- <el-menu-item index="/archives">
+      <el-menu-item index="/archives">
         <i class="el-icon-s-cooperation"></i>
-        <span slot="title">管理</span>
-      </el-menu-item>-->
-      <el-menu-item index="/admin">
-        <i class="el-icon-s-cooperation"></i>
-        <span slot="title">管理</span>
+        <span slot="title">归档</span>
       </el-menu-item>
+      <!-- <el-menu-item index="/admin">
+        <i class="el-icon-s-cooperation"></i>
+        <span slot="title">管理</span>
+      </el-menu-item> -->
     </el-menu>
   </div>
 </template>

@@ -45,11 +45,11 @@ export default {
   padding: 40px;
 }
 .tags-show-area {
-  margin: 100px;
-  display: flex;
-  justify-content: space-around;
+  margin: 100px auto;
 }
 .tags-show-area span {
-  border-bottom: 1px dashed rgba(0, 0, 0, 0.5);
+  /* border-bottom: 1px dashed rgba(0, 0, 0, 0.5); */
+  display: inline-block;
+  padding: 0.3em;
 }
 </style>

@@ -6,9 +6,11 @@ export function getAllPosts() {
     })
 }
 
-export function getPostDetail(id) {
+// 获取文章详细内容
+export function getPostDetail(data) {
     return request({
-        url: `/post/${id}`,
+        url: `/post`,
+        params: data
     })
 }
 
@@ -54,5 +56,14 @@ export function getTag(params) {
     return request({
         url: "/tag",
         params
+    })
+}
+
+// 发表评论
+export function sendComment(data) {
+    return request({
+        method: "post",
+        url:"/comment",
+        data
     })
 }

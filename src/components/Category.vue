@@ -47,10 +47,12 @@ export default {
 }
 .category-show-area {
   margin: 100px auto;
-  display: flex;
-  justify-content: space-around;
+  /* display: flex;
+  justify-content: space-around; */
 }
 .category-show-area span {
-  border-bottom: 1px dashed rgba(0, 0, 0, 0.5);
+  /* border-bottom: 1px dashed rgba(0, 0, 0, 0.5); */
+  display: inline-block;
+  padding: 0.3em;
 }
 </style>

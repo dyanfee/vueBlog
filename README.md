@@ -4,6 +4,11 @@
 项目后端：https://github.com/dyanfee/vueblogServer
 部署地址：http://yanfee.com
 
+## TODO
+    * 评论模块
+    * 浏览次数
+    * 游客登陆
+
 ## Project setup
 ```
 npm install

@@ -13,7 +13,7 @@
           <el-container>
             <el-main>
               <back-top></back-top>
-              <router-view />
+              <router-view v-if="isRouterAlive" />
             </el-main>
             <el-footer>
               <footer-info></footer-info>
@@ -33,13 +33,19 @@ import BackTop from "components/BackTop";
 import HeaderMenu from "components/HeaderMenu";
 export default {
   name: "Home",
+  provide() {
+    return {
+      reload: this.reload
+    };
+  },
   data() {
     return {
       cardsOffset: 0,
       isCardShow: false,
       screenWidth: "",
       screenHeight: "",
-      isShowSilder: true
+      isShowSilder: true,
+      isRouterAlive: true
     };
   },
 
@@ -89,6 +95,12 @@ export default {
       } else {
         this.isShowSilder = true;
       }
+    },
+    reload() {
+      this.isRouterAlive = false;
+      this.$nextTick(function() {
+        this.isRouterAlive = true;
+      });
     }
   }
 };
@@ -97,7 +109,6 @@ export default {
 <style scoped>
 .home {
   height: 100%;
-  background-color: #f5f7f9;
 }
 .el-header {
   background-color: #222222;
@@ -107,19 +118,16 @@ export default {
   overflow: visible;
 }
 .el-footer {
-  background-color: #f5f7f9;
   color: var(--color-text);
   text-align: center;
 }
 .el-aside {
-  background-color: #f5f7f9;
   color: #333;
   text-align: center;
   line-height: 20px;
 }
 
 .el-main {
-  background-color: #f5f7f9;
   color: #333;
   text-align: center;
   line-height: none;
