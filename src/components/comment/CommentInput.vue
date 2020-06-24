@@ -70,6 +70,14 @@ export default {
     post: {
       type: String,
       defalut: ""
+    },
+    commentId: {
+      type: String,
+      default: ""
+    },
+    touser: {
+      type: String,
+      default: ""
     }
   },
   components: {
@@ -79,6 +87,7 @@ export default {
     setTimeout(() => {
       this.handDom();
     }, 200);
+    if (this.touser) this.content = `@${this.touser}: `;
   },
   methods: {
     handleFocus(e) {
@@ -90,16 +99,41 @@ export default {
       // 按下ctrl + enter 发布 点击发布
       if (!this.name) this.name = `游客` + Math.floor(Math.random() * 1000000);
       if (!this.content) return alertMsg("请输入评论内容!");
-      sendComment({
-        post: this.post,
-        user: this.name,
-        content: this.content
-      }).then(res => {
-        if (res.code == 200) {
-          alertMsg("评论成功", "success");
-          this.reload();
+      if (this.post)
+        sendComment({
+          post: this.post,
+          user: this.name,
+          content: this.content
+        }).then(res => {
+          if (res.code == 200) {
+            alertMsg("评论成功", "success");
+            this.reload();
+          }
+        });
+      if (this.commentId) {
+        console.log(this.commentId, "-----------");
+
+        let rex = new RegExp(`@${this.touser}: `);
+        let content = this.content;
+        if (this.content.match(rex)) {
+          content = this.content.replace(rex, "");
+        } else {
+          this.touser = "";
         }
-      });
+        sendComment({
+          commentId: this.commentId,
+          replay: {
+            fromuser: this.name,
+            touser: this.touser,
+            content: content
+          }
+        }).then(res => {
+          if (res.code == 200) {
+            alertMsg("回复评论成功", "success");
+            this.reload();
+          }
+        });
+      }
     },
     clickCancel() {
       this.isOpen = false;
@@ -125,6 +159,7 @@ export default {
 .comment-input {
   width: 100%;
   vertical-align: center;
+  margin-top: 20px;
 }
 .input-area {
   display: flex;

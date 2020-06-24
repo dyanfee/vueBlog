@@ -10,13 +10,28 @@
         全部评论
         <span>({{comments.length}})</span>
       </div>
-      <comment-item v-for="item in comments" :key="item.date" :comment="item">
+      <comment-item
+        class="comment-ist"
+        v-for="item in comments"
+        @clickReply="clickReply(item._id,'')"
+        :key="item.date"
+        :comment="item"
+      >
         <comment-item
+          class="comment-scd"
           v-for="replay in item.replay"
+          @clickReply="clickReply(item._id,replay.fromuser)"
           :key="replay.date"
           :comment="replay"
           :isToLandlord="replay.touser==item.user"
+          :isReplay="true"
         ></comment-item>
+        <comment-input
+          v-if="showReply(item._id)"
+          :commentId="item._id"
+          :key="touser"
+          :touser="touser"
+        ></comment-input>
       </comment-item>
     </div>
   </div>
@@ -25,6 +40,7 @@
 <script>
 import CommentItem from "./CommentItem";
 import CommentInput from "./CommentInput";
+import CommonTrans from "components/transform/CommonTrans";
 export default {
   name: "Comment",
   props: {
@@ -39,9 +55,28 @@ export default {
       defalut: ""
     }
   },
+  data() {
+    return {
+      cid: "",
+      touser: ""
+    };
+  },
   components: {
     CommentItem,
-    CommentInput
+    CommentInput,
+    CommonTrans
+  },
+  methods: {
+    clickReply(id, user) {
+      this.cid = id;
+      this.touser = user;
+    },
+    showReply(id) {
+      if (id == this.cid) {
+        return true;
+      }
+      return false;
+    }
   }
 };
 </script>
@@ -63,6 +98,12 @@ export default {
   padding-left: 10px;
   font-size: 18px;
   line-height: 18px;
+}
+.comment-ist {
+  margin: 30px 0 20px 20px;
+}
+.comment-scd {
+  margin-top: 10px;
 }
 .commet-header > span {
   font-size: 16px;

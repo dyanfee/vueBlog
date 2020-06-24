@@ -7,19 +7,33 @@
         <div class="comment-info">{{timeInfo}}</div>
       </div>
     </div>
-    <div class="comment-content">
-      <!-- <span v-if="replayUser">
-        回复 
-        <span class="comment-name">{{comment.touser}}:</span>
-      </span>-->
-      <a href="#" v-if="replayUser">@{{comment.touser}}</a>
-      {{comment.content}}
+    <div :class="{'commnet-body':!isReplay}">
+      <div class="comment-content">
+        <a href="#" v-if="replayUser">@{{comment.touser}}</a>
+        {{comment.content}}
+        <div class="comment-fanv">
+          <div>
+            <!-- <svg class="svg">
+            <use xlink:href="#good" />
+          </svg>
+            {{30}}-->
+          </div>
+          <div class="reply-div" @click="clickReply">
+            <svg class="svg">
+              <use xlink:href="#comment" />
+            </svg>
+            回复
+          </div>
+        </div>
+      </div>
+      <slot />
     </div>
-    <slot />
   </div>
 </template>
 
 <script>
+import CommentInput from "./CommentInput";
+
 import { formatDate } from "common/utils";
 export default {
   name: "CommentItem",
@@ -33,7 +47,19 @@ export default {
     isToLandlord: {
       type: Boolean,
       default: false
+    },
+    isReplay: {
+      type: Boolean,
+      default: false
     }
+  },
+  data() {
+    return {
+      isShowInput: false
+    };
+  },
+  components: {
+    CommentInput
   },
   computed: {
     timeInfo() {
@@ -46,24 +72,30 @@ export default {
       return formatDate(date, fmt);
     },
     replayUser() {
-      return this.comment.touser && !this.isToLandlord;
+      return !!this.comment.touser;
+    }
+  },
+  methods: {
+    clickReply(e) {
+      this.$emit("clickReply");
     }
   }
 };
 </script>
 
 <style scoped>
-.commnet-item {
-  margin: 30px 0 30px 20px;
-}
 .comment-head {
   display: flex;
   text-align: left;
-}        
+}
 
 .comment-head > div {
   margin-left: 5px;
   vertical-align: center;
+}
+.commnet-body {
+  margin-left: 50px;
+  margin-right: 50px;
 }
 .comment-name {
   font-size: 14px;
@@ -80,13 +112,31 @@ export default {
 }
 .comment-content {
   text-align: left;
-  margin-left: 50px;
-  margin-right: 50px;
-  padding: 10px 0;
+  /* margin-left: 50px;
+  margin-right: 50px; */
+  padding: 10px 0 15px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.replay {
+  margin-left: 50px;
 }
 .comment-content a {
   text-decoration: none;
   color: blue;
+}
+.comment-fanv {
+  font-size: 16px;
+  color: #999;
+  text-align: left;
+  display: flex;
+  padding-top: 5px;
+}
+.comment-fanv svg {
+  width: 1em;
+  height: 1em;
+}
+.reply-div {
+  margin-left: 10px;
+  vertical-align: center;
 }
 </style>
