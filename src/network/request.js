@@ -1,8 +1,9 @@
 import axios from 'axios'
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 const instance = axios.create({
-    baseURL: "http://127.0.0.1:3000/api/",
-    // baseURL: "/api/",
+    // baseURL: "http://127.0.0.1:3000/api/",// 直接本地链接
+    baseURL: "/api/",// 跨域代理配置后使用路径vue.config.js,
+    // baseURL: "https://yanfee.com/api/",
     timeout: 5000
 })
 if (localStorage.getItem('jwt')) {

@@ -14,7 +14,7 @@
         <el-row>
           <el-input
             type="textarea"
-            :autosize="{ minRows: 3,maxRows:3}"
+            :autosize="{ minRows: 3, maxRows: 3 }"
             resize="none"
             placeholder="请输入评论内容..."
             v-model="content"
@@ -33,8 +33,11 @@
                 key="submit"
                 type="danger"
                 round
-              >发布</el-button>
-              <el-button size="small" @click="clickCancel" key="cancel" round>取消</el-button>
+                >发布</el-button
+              >
+              <el-button size="small" @click="clickCancel" key="cancel" round
+                >取消</el-button
+              >
             </el-col>
           </el-row>
           <!-- <div v-if="isOpen" class="commit-area" ref="actionArea"> -->
@@ -58,30 +61,30 @@ export default {
       name: "",
       content: "",
       isOpen: false,
-      areaHeight: 0
+      areaHeight: 0,
     };
   },
   inject: ["reload"],
   props: {
     isShowAvator: {
       type: Boolean,
-      default: false
+      default: false,
     },
     post: {
       type: String,
-      defalut: ""
+      defalut: "",
     },
     commentId: {
       type: String,
-      default: ""
+      default: "",
     },
     touser: {
       type: String,
-      default: ""
-    }
+      default: "",
+    },
   },
   components: {
-    CommonTrans
+    CommonTrans,
   },
   mounted() {
     setTimeout(() => {
@@ -103,8 +106,8 @@ export default {
         sendComment({
           post: this.post,
           user: this.name,
-          content: this.content
-        }).then(res => {
+          content: this.content,
+        }).then((res) => {
           if (res.code == 200) {
             alertMsg("评论成功", "success");
             this.reload();
@@ -125,9 +128,9 @@ export default {
           replay: {
             fromuser: this.name,
             touser: this.touser,
-            content: content
-          }
-        }).then(res => {
+            content: content,
+          },
+        }).then((res) => {
           if (res.code == 200) {
             alertMsg("回复评论成功", "success");
             this.reload();
@@ -138,11 +141,11 @@ export default {
     clickCancel() {
       this.isOpen = false;
     },
-    handDom: function() {
+    handDom: function () {
       if (this.$refs.actionArea)
         this.areaHeight = this.$refs.actionArea.offsetHeight;
       else this.areaHeight = 32;
-    }
+    },
   },
   computed: {
     isCanSubmit() {
@@ -150,8 +153,8 @@ export default {
     },
     tansHeight() {
       return this.areaHeight;
-    }
-  }
+    },
+  },
 };
 </script>
 

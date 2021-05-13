@@ -2,28 +2,28 @@
   <div class="comment">
     <!-- 评论输入模块 -->
     <div class="input-comment">
-      <comment-input :isShowAvator="true" :post="post"></comment-input>
+      <comment-input :isShowAvator="isShowAvator" :post="post"></comment-input>
     </div>
     <!-- 评论展示模块 -->
     <div class="show-comment" v-if="comments.length">
       <div class="commet-header">
         全部评论
-        <span>({{comments.length}})</span>
+        <span>({{ comments.length }})</span>
       </div>
       <comment-item
         class="comment-ist"
         v-for="item in comments"
-        @clickReply="clickReply(item._id,'')"
+        @clickReply="clickReply(item._id, '')"
         :key="item.date"
         :comment="item"
       >
         <comment-item
           class="comment-scd"
           v-for="replay in item.replay"
-          @clickReply="clickReply(item._id,replay.fromuser)"
+          @clickReply="clickReply(item._id, replay.fromuser)"
           :key="replay.date"
           :comment="replay"
-          :isToLandlord="replay.touser==item.user"
+          :isToLandlord="replay.touser == item.user"
           :isReplay="true"
         ></comment-item>
         <comment-input
@@ -48,25 +48,34 @@ export default {
       type: Array,
       defalut() {
         return [];
-      }
+      },
     },
     post: {
       type: String,
-      defalut: ""
-    }
+      defalut: "",
+    },
   },
   data() {
     return {
       cid: "",
-      touser: ""
+      touser: "",
+      isShowAvator: true,
     };
   },
   components: {
     CommentItem,
     CommentInput,
-    CommonTrans
+    CommonTrans,
+  },
+  mounted() {
+    this.checkWidth();
   },
   methods: {
+    checkWidth() {
+      if (document.body.clientWidth < 978) {
+        this.isShowAvator = false;
+      }
+    },
     clickReply(id, user) {
       this.cid = id;
       this.touser = user;
@@ -76,8 +85,8 @@ export default {
         return true;
       }
       return false;
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -1,14 +1,29 @@
 <template>
-  <el-form class="sign" :rules="rules" ref="rform" :model="form" label-width="28%">
+  <el-form
+    class="sign"
+    :rules="rules"
+    ref="rform"
+    :model="form"
+    label-width="28%"
+  >
     <div class="top">
       <h2>后台管理</h2>
     </div>
     <div class="center">
       <el-form-item label="用户名" prop="name">
-        <el-input placeholder="请输入用户名" size="medium" v-model="form.name"></el-input>
+        <el-input
+          placeholder="请输入用户名"
+          size="medium"
+          v-model="form.name"
+        ></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input placeholder="请输入密码" size="medium" v-model="form.password" show-password></el-input>
+        <el-input
+          placeholder="请输入密码"
+          size="medium"
+          v-model="form.password"
+          show-password
+        ></el-input>
       </el-form-item>
     </div>
     <el-form-item class="bottom">
@@ -19,24 +34,26 @@
 </template>
 
 <script>
+// import bcrypt from "bcryptjs";
 export default {
   data() {
     return {
       form: {
         name: "",
-        password: ""
+        password: "",
       },
       rules: {
         name: [{ required: true, message: "请输入用户名", trigger: "blur" }],
-        password: [{ required: true, message: "请输入密码", trigger: "blur" }]
-      }
+        password: [{ required: true, message: "请输入密码", trigger: "blur" }],
+      },
     };
   },
   methods: {
     onSubmit(formName) {
-      this.$refs[formName].validate(valid => {
+      this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$store.dispatch("userLogin", this.form).then(res => {
+          // this.form.password = bcrypt.hashSync(this.form.password, 10);
+          this.$store.dispatch("userLogin", this.form).then((res) => {
             this.$router.replace("/admin");
           });
         } else {
@@ -47,8 +64,8 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
-    }
-  }
+    },
+  },
 };
 </script>
 

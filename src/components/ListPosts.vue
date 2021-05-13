@@ -46,7 +46,7 @@ export default {
         page: val,
         limit: this.limit
       }).then(res => {
-        this.list = [...res.posts];
+        this.list = [...res.posts].reverse();
         setTimeout(() => {}, 500);
       });
     },
